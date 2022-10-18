@@ -172,6 +172,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 8.08
   distance: 5
+  direction: 1
 --- !u!212 &295982406
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -277,8 +278,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 295982403}
-  offset: 0
-  offsetSmoothing: 0
+  offset: 10
+  direct: {fileID: 0}
 --- !u!20 &519420031
 Camera:
   m_ObjectHideFlags: 0

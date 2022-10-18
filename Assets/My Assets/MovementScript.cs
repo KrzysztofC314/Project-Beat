@@ -6,7 +6,8 @@ public class MovementScript : MonoBehaviour
 {
     public float speed;
     public float distance;
-    int direction = 1;
+    [HideInInspector]
+    public int direction = 1;
     int lane = -1;
     
     // Start is called before the first frame update
