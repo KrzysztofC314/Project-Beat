@@ -8,6 +8,7 @@ public class MovementScript : MonoBehaviour
     public float horizontalSpeed = 5.0f;
     private Rigidbody2D rb;
     private Animator anim;
+    private bool facingRight = true;
     Vector2 movement;
 
     void Start()
@@ -20,12 +21,24 @@ public class MovementScript : MonoBehaviour
     {
         movement.x = Input.GetAxis("Horizontal")*horizontalSpeed;
         movement.y = Input.GetAxis("Vertical")*verticalSpeed;
-        anim.SetFloat("horizontal", movement.x);
         anim.SetFloat("speed", movement.sqrMagnitude);
     }
 
     void FixedUpdate()
     {
         rb.MovePosition(rb.position + movement * Time.fixedDeltaTime);
+        if(movement.x > 0 && !facingRight)
+        {
+            Flip();
+        }
+        else if(movement.x < 0 && facingRight)
+        {
+            Flip();
+        }
+    }
+    void Flip()
+    {
+        facingRight = !facingRight;
+        transform.Rotate(0, 180, 0);
     }
 }
