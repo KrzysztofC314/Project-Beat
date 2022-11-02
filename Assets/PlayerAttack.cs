@@ -5,6 +5,10 @@ using UnityEngine;
 public class PlayerAttack : MonoBehaviour
 {
     public Animator animator;
+    public Transform attackPoint;
+    public float attackRange;
+    public LayerMask enemyLayers;
+
     // Update is called once per frame
     void Update()
     {
@@ -16,5 +20,20 @@ public class PlayerAttack : MonoBehaviour
     void Attack()
     {
         animator.SetTrigger("Attack");
+
+        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
+
+        foreach(Collider2D enemy in hitEnemies)
+        {
+            Debug.Log("We hit" + enemy.name);
+        }
+
+
+    }
+    void OnDrawGizmosSelected()
+    {
+        if (attackPoint == null)
+            return;
+        Gizmos.DrawWireSphere(attackPoint.position, attackRange);
     }
 }

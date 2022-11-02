@@ -7,7 +7,7 @@ public class MovementScript : MonoBehaviour
     public float verticalSpeed = 2.0f;
     public float horizontalSpeed = 5.0f;
     private Rigidbody2D rb;
-    private Animator anim;
+    public Animator anim;
     private bool facingRight = true;
     Vector2 movement;
 
