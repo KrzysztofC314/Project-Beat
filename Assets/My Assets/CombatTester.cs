@@ -16,6 +16,9 @@ public class CombatTester : MonoBehaviour
     public Animator animator;
     public Transform attackPoint;
     public float attackRange;
+    public int attackDamage = 20;
+    public float attackRate = 2f;
+    float nextAttackTime = 0f;
 
     private void Awake()
     {
@@ -27,23 +30,28 @@ public class CombatTester : MonoBehaviour
     void Update()
     {
         controls = input.GetInput();
-        if (controls.AttackState)
+        if (Time.time >= nextAttackTime)
         {
-            animator.SetTrigger("Attack");
-            inLineCollider.OverlapCollider(contactFilter2D, cols);
-            if (cols.Count > 0)
+            if (controls.AttackState)
             {
-                foreach (var col in cols)
+                animator.SetTrigger("Attack");
+                inLineCollider.OverlapCollider(contactFilter2D, cols);
+                if (cols.Count > 0)
                 {
-                    print(col.transform.name);
-                    if (col.TryGetComponent(out SpriteRenderer sr))
+                    foreach (var col in cols)
                     {
-                        sr.color = Color.red;
+                        print(col.transform.name);
+                        if (col.TryGetComponent(out SpriteRenderer sr))
+                        {
+                            sr.color = Color.red;
+                        }
+                        Attack();
+                        nextAttackTime = Time.time + 1f / attackRate;
                     }
-                    Attack();
                 }
             }
         }
+        
     }
     void Attack()
     {
@@ -52,7 +60,7 @@ public class CombatTester : MonoBehaviour
 
         foreach (Collider2D enemy in hitEnemies)
         {
-            Debug.Log("We hit" + enemy.name);
+            enemy.GetComponent<EnemyHealth>().TakeDamage(attackDamage);
         }
 
 
