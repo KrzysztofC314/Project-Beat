@@ -35173,6 +35173,7 @@ MonoBehaviour:
   VerticalControls: Vertical
   JumpButton: 32
   AttackButton: 127
+  DashButton: 304
 --- !u!114 &295261474
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -35189,8 +35190,12 @@ MonoBehaviour:
   doesCharacterJump: 1
   animator: {fileID: 2097849376}
   baseRB: {fileID: 295261475}
-  hSpeed: 5
-  vSpeed: 2
+  hSpeed: 7.5
+  dashHSpeed: 150
+  vSpeed: 3
+  dashVSpeed: 60
+  dashLength: 1
+  dashCooldown: 1
   movementSmooth: 0.21
   charRB: {fileID: 2097849375}
   jumpVal: 10

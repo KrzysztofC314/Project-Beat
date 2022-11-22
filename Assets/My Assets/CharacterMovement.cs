@@ -12,7 +12,13 @@ public class CharacterMovement : MonoBehaviour
     [Header("Base / Root")]
     [SerializeField] private Rigidbody2D baseRB;
     [SerializeField] private float hSpeed = 10f;
+    private float activeHSpeed;
+    [SerializeField] private float dashHSpeed;
     [SerializeField] private float vSpeed = 6f;
+    private float activeVSpeed;
+    [SerializeField] private float dashVSpeed;
+    [SerializeField] private float dashLength = .5f;
+    [SerializeField] private float dashCooldown= 1f;
     [Range(0, 1.0f)]
     [SerializeField] float movementSmooth = 0.5f;
 
@@ -28,6 +34,8 @@ public class CharacterMovement : MonoBehaviour
     [SerializeField] private float jumpingGravityScale;
     [SerializeField] private float fallingGravityScale;
     private bool jump;
+    private float dashCounter;
+    private float dashCoolCounter;
 
     private bool facingRight = true;
     private Vector3 velocity = Vector3.zero;
@@ -47,6 +55,8 @@ public class CharacterMovement : MonoBehaviour
     private void Start()
     {
         charDefaultRelPos = charRB.transform.localPosition;
+        activeHSpeed = hSpeed;
+        activeVSpeed = vSpeed;
     }
     
     private void Update()
@@ -55,6 +65,32 @@ public class CharacterMovement : MonoBehaviour
         if (controls.JumpState && currentJumps < possibleJumps)
         {
             jump = true;
+        }
+        if (controls.DashState)
+        {
+            if (dashCoolCounter <=0 && dashCounter <=0)
+            {
+                activeHSpeed = dashHSpeed;
+                activeVSpeed = dashVSpeed;
+                dashCounter = dashLength;
+            }
+        }
+
+        if (dashCounter > 0)
+        {
+            dashCounter -= Time.deltaTime;
+
+            if (dashCounter <= 0)
+            {
+                activeHSpeed = hSpeed;
+                activeVSpeed = vSpeed;
+                dashCoolCounter = dashCooldown;
+            }
+        }
+
+        if (dashCoolCounter > 0)
+        {
+            dashCoolCounter -= Time.deltaTime;
         }
     }
 

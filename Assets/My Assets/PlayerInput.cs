@@ -9,6 +9,7 @@ public class PlayerInput : MonoBehaviour
 
     [SerializeField] private KeyCode JumpButton;
     [SerializeField] private KeyCode AttackButton;
+    [SerializeField] private KeyCode DashButton;
 
     Controls controls = new Controls();
 
@@ -18,6 +19,7 @@ public class PlayerInput : MonoBehaviour
         controls.VerticalMove = Input.GetAxis(VerticalControls);
         controls.JumpState = Input.GetKeyDown(JumpButton);
         controls.AttackState = Input.GetKeyDown(AttackButton);
+        controls.DashState = Input.GetKeyDown(DashButton);
 
         return controls;
     } 

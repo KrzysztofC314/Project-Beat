@@ -8,9 +8,11 @@ public class Controls
     float verticalMove;
     bool jumpState;
     bool attackState;
+    bool dashState;
 
     public float HorizontalMove { get => horizontalMove; set => horizontalMove = value; }
     public float VerticalMove { get => verticalMove; set => verticalMove = value; }
     public bool JumpState { get => jumpState; set => jumpState = value; }
     public bool AttackState { get => attackState; set => attackState = value; }
+    public bool DashState { get => dashState; set => dashState = value; }
 }
