@@ -108,7 +108,7 @@ public class CharacterMovement : MonoBehaviour
 
         if (canMove)
         {
-            Vector3 targetVelocity = new Vector2(controls.HorizontalMove * hSpeed, controls.VerticalMove * vSpeed);
+            Vector3 targetVelocity = new Vector2(controls.HorizontalMove * activeHSpeed, controls.VerticalMove * activeVSpeed);
 
             Vector2 _velocity = Vector3.SmoothDamp(baseRB.velocity, targetVelocity, ref velocity, movementSmooth);
             baseRB.velocity = _velocity;

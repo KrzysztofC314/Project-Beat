@@ -35191,10 +35191,10 @@ MonoBehaviour:
   animator: {fileID: 2097849376}
   baseRB: {fileID: 295261475}
   hSpeed: 7.5
-  dashHSpeed: 150
+  dashHSpeed: 22.5
   vSpeed: 3
-  dashVSpeed: 60
-  dashLength: 1
+  dashVSpeed: 9
+  dashLength: 0.25
   dashCooldown: 1
   movementSmooth: 0.21
   charRB: {fileID: 2097849375}
