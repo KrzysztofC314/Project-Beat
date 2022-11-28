@@ -35,6 +35,7 @@ public class CombatTester : MonoBehaviour
             if (controls.AttackState)
             {
                 animator.SetTrigger("Attack");
+                nextAttackTime = Time.time + 1f / attackRate;
                 inLineCollider.OverlapCollider(contactFilter2D, cols);
                 if (cols.Count > 0)
                 {
@@ -46,9 +47,9 @@ public class CombatTester : MonoBehaviour
                             sr.color = Color.red;
                         }
                         Attack();
-                        nextAttackTime = Time.time + 1f / attackRate;
                     }
                 }
+                nextAttackTime = Time.time + 1f / attackRate;
             }
         }
         
