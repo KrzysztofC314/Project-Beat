@@ -11,24 +11,27 @@ public class Enemy_behaviour : MonoBehaviour
      public float attackDistance;
      public float moveSpeed;
      public float timer;
-      #endregion
-      
-      #region Private Variables
-      private RaycastHit2D hit;
-      private GameObject target;
-      private Animator anim;
-      private float distance;
-      private bool attackMode;
-      private bool inRange;
-      private bool cooling;
-      private float intTimer;
-       #endregion
+     public int maxHealth = 20;
+    #endregion
+
+    #region Private Variables
+    private RaycastHit2D hit;
+    private GameObject target;
+    private Animator anim;
+    private Collider2D collider;
+    private float distance;
+    private bool attackMode;
+    private bool inRange;
+    private bool cooling;
+    private float intTimer;
+    private int currentHealth;
+    #endregion
 
     void Awake ()
     {
       intTimer = timer;
       anim = GetComponent<Animator>();
-
+      currentHealth = maxHealth;
 
     }
 
@@ -116,6 +119,23 @@ public class Enemy_behaviour : MonoBehaviour
          cooling = false;
          attackMode = false;
          anim.SetBool("Attack", false);
+    }
+
+    public void TakeDamage(int damage)
+    {
+        currentHealth -= damage;
+
+        if (currentHealth <= 0)
+        {
+            Die();
+        }
+    }
+
+    void Die()
+    {
+        anim.SetBool("IsDead",true);
+        collider.enabled = false;
+        this.enabled = false;
     }
 
     void RaycastDebugger()
