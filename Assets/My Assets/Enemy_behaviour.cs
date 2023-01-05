@@ -11,27 +11,24 @@ public class Enemy_behaviour : MonoBehaviour
      public float attackDistance;
      public float moveSpeed;
      public float timer;
-     public int maxHealth = 20;
-    #endregion
-
-    #region Private Variables
-    private RaycastHit2D hit;
-    private GameObject target;
-    private Animator anim;
-    private Collider2D collider;
-    private float distance;
-    private bool attackMode;
-    private bool inRange;
-    private bool cooling;
-    private float intTimer;
-    private int currentHealth;
-    #endregion
+      #endregion
+      
+      #region Private Variables
+      private RaycastHit2D hit;
+      private GameObject target;
+      private Animator anim;
+      private float distance;
+      private bool attackMode;
+      private bool inRange;
+      private bool cooling;
+      private float intTimer;
+       #endregion
 
     void Awake ()
     {
       intTimer = timer;
       anim = GetComponent<Animator>();
-      currentHealth = maxHealth;
+
 
     }
 
@@ -95,7 +92,7 @@ public class Enemy_behaviour : MonoBehaviour
     void Move()
     {
         anim.SetBool("canWalk", true);
-        if (!anim.GetCurrentAnimatorStateInfo(0).IsName("Skel_attack"))
+        if (!anim.GetCurrentAnimatorStateInfo(0).IsName("WalkAnimation"))
         {
            Vector2 targetPosition = new Vector2(target.transform.position.x, transform.position.y);
         
@@ -119,23 +116,6 @@ public class Enemy_behaviour : MonoBehaviour
          cooling = false;
          attackMode = false;
          anim.SetBool("Attack", false);
-    }
-
-    public void TakeDamage(int damage)
-    {
-        currentHealth -= damage;
-
-        if (currentHealth <= 0)
-        {
-            Die();
-        }
-    }
-
-    void Die()
-    {
-        anim.SetBool("IsDead",true);
-        collider.enabled = false;
-        this.enabled = false;
     }
 
     void RaycastDebugger()
