@@ -14,4 +14,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Parking Scene.unity
     guid: 7b29fa0dea0c7b5488097ba256406362
+  - enabled: 1
+    path: Assets/Scenes/Office Scene.unity
+    guid: d2d271a0cf86b8041b86745ec1adb45f
+  - enabled: 1
+    path: Assets/Scenes/Outside Scene.unity
+    guid: b9046ad17a9b5e5429bd51adf20bedd2
   m_configObjects: {}
