@@ -8,8 +8,9 @@ public class Agent : MonoBehaviour
 {
     private AgentAnimations agentAnimations;
     private AgentMover agentMover;
-    [SerializeField] private LayerMask enemyLayer;
     [SerializeField] private Collider2D inLineCollider;
+    private ContactFilter2D contactFilter2D;
+    [SerializeField] private LayerMask enemyLayer;
     [SerializeField] private Vector2 movementInput;
     [SerializeField] private Animator animator;
     public List<Collider2D> cols = new List<Collider2D>();
@@ -32,10 +33,16 @@ public class Agent : MonoBehaviour
         animator.SetTrigger("Attack");
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayer);
 
-        foreach (Collider2D enemy in hitEnemies)
+        inLineCollider.OverlapCollider(contactFilter2D, cols);
+        if (cols.Count > 0)
         {
-            enemy.GetComponent<PlayerHealth>().TakeDamage(attackDamage);
+            foreach (Collider2D enemy in hitEnemies)
+            {
+                enemy.GetComponent<PlayerHealth>().TakeDamage(attackDamage);
+            }
         }
+
+
     }
 
     private void Awake()
